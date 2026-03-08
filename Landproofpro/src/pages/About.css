@@ -1,0 +1,96 @@
+.about-page { background: var(--deep-navy); }
+
+.about-hero { position: relative; overflow: hidden; }
+.about-hero__bg { position: absolute; inset: 0; pointer-events: none; }
+.about-hero__glow {
+  position: absolute;
+  width: 700px; height: 400px;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(0, 168, 107, 0.1), transparent 70%);
+  filter: blur(60px);
+}
+
+.about-hero .container { position: relative; z-index: 1; }
+
+.about-story { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+.about-stats-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.about-stat {
+  background: var(--slate);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-stat__val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--emerald-light);
+}
+
+.about-stat__label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.about-value__icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: rgba(0, 168, 107, 0.12);
+  color: var(--emerald-light);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.team-card { text-align: center; align-items: center; display: flex; flex-direction: column; }
+
+.team-avatar {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--emerald-dark), var(--slate-2));
+  color: var(--emerald-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.about-expansion {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-markets { display: flex; flex-direction: column; gap: 10px; }
+
+.about-market {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.about-market span:first-child { font-size: 0.9rem; color: var(--text-secondary); }
+
+.about-cta { padding: 36px; }
+
+@media (max-width: 1024px) {
+  .about-story, .about-expansion { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 768px) {
+  .about-stats-box { grid-template-columns: 1fr; }
+}

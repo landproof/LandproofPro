@@ -1,0 +1,41 @@
+@import './VerifyDashboard.css';
+
+/* ─── BUILDTRACK SPECIFIC STYLES ─── */
+
+.bt-stepper-container {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 40;
+  padding: 24px 0 16px;
+  margin: -24px 0 24px;
+  background: rgba(6, 14, 31, 0.85); /* Deep navy with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  pointer-events: none;
+}
+
+.input-icon.left {
+  left: 14px;
+}
+
+.form-input.auto-filling {
+  animation: bgPulse 1.5s infinite;
+  border-color: var(--emerald);
+}
+
+@keyframes bgPulse {
+  0% { background: rgba(0, 168, 107, 0.05); }
+  50% { background: rgba(0, 168, 107, 0.15); }
+  100% { background: rgba(0, 168, 107, 0.05); }
+}

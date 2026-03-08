@@ -1,0 +1,237 @@
+@import './VerifyDashboard.css';
+
+/* ─── CUSTOM DROPDOWN ─── */
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.custom-dropdown__trigger {
+  user-select: none;
+}
+
+.dropdown-chevron {
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+}
+
+.dropdown-chevron.open {
+  transform: rotate(180deg);
+}
+
+.custom-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-search {
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.dropdown-search::placeholder {
+  color: var(--text-muted);
+}
+
+.dropdown-list {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-item:hover, .dropdown-item.selected {
+  background: rgba(0, 168, 107, 0.1);
+  color: var(--emerald-light);
+}
+
+.dropdown-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ─── TIER CARDS ─── */
+.tier-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  border-left-width: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tier-card:hover {
+  transform: translateX(4px);
+  background: rgba(255,255,255,0.05);
+}
+
+.tier-ok {
+  border-left-color: var(--emerald);
+  box-shadow: inset 20px 0 30px -20px rgba(0, 168, 107, 0.1);
+}
+
+.tier-warning {
+  border-left-color: var(--warning);
+  box-shadow: inset 20px 0 30px -20px rgba(245, 158, 11, 0.1);
+}
+
+.tier-danger {
+  border-left-color: var(--danger);
+  box-shadow: inset 20px 0 30px -20px rgba(239, 68, 68, 0.1);
+}
+
+.tier-card__score {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  min-width: 60px;
+}
+
+.tier-ok .tier-card__score { color: var(--emerald-light); }
+.tier-warning .tier-card__score { color: var(--gold-light); }
+.tier-danger .tier-card__score { color: var(--danger); }
+
+.tier-card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tier-card__content strong {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.tier-card__content span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ─── LIVE INTELLIGENCE RADAR ─── */
+.risk-radar-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.radar-container {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.radar-svg {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.radar-svg.active {
+  opacity: 1;
+  filter: grayscale(0);
+}
+
+.radar-grid {
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 1;
+}
+
+.radar-axis {
+  stroke: rgba(255,255,255,0.1);
+  stroke-dasharray: 2 4;
+}
+
+.radar-data {
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+}
+
+.radar-svg.active .radar-data {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.radar-dot {
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) ease forwards;
+}
+
+.radar-svg.active .radar-dot {
+  animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.radar-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.radar-labels span {
+  position: absolute;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.radar-svg.active ~ .radar-labels span {
+  color: var(--emerald-light);
+  text-shadow: 0 0 10px rgba(0, 168, 107, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .vd-layout { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 768px) {
+  .card { padding: 24px !important; }
+  .radar-container { display: none; }
+}

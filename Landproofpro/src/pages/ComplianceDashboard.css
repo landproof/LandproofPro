@@ -1,0 +1,120 @@
+@import './VerifyDashboard.css';
+
+/* ─── LIVE HEATMAP OVERLAY ─── */
+.comp-heatmap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(145deg, var(--slate), var(--navy-2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comp-heatmap__grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.5;
+}
+
+.comp-heatmap__map {
+  position: absolute;
+  inset: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><path d="M50 150 Q120 120 200 180 T350 100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4"/><path d="M100 300 Q200 250 300 350" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/></svg>');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+  transition: opacity 0.5s ease;
+}
+
+.comp-heatmap__overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0;
+  transition: opacity 1s ease, background 1s ease;
+}
+
+.comp-heatmap__overlay.active { opacity: 0.6; }
+.comp-heatmap__overlay.ok { background: var(--emerald); }
+.comp-heatmap__overlay.warning { background: var(--warning); filter: blur(30px); }
+.comp-heatmap__overlay.danger { background: var(--danger); }
+
+.comp-heatmap__flood {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.3));
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+.comp-heatmap__flood.active { opacity: 1; }
+
+.comp-heatmap__pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.2), 0 8px 16px rgba(0,0,0,0.5);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+}
+
+.comp-heatmap__pin.active { transform: translate(-50%, -50%) scale(1); }
+
+.comp-heatmap__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 40px;
+  position: relative;
+  z-index: 20;
+}
+
+/* ─── PROGRESSIVE FORM DISCLOSURE ─── */
+.comp-advanced-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+.comp-advanced-fields.open {
+  max-height: 400px;
+  opacity: 1;
+  padding-top: 8px; /* Visual spacing */
+}
+
+/* Responsive fixes for heatmap */
+@media (max-width: 1024px) {
+  .comp-heatmap {
+    aspect-ratio: 16 / 9;
+  }
+}
